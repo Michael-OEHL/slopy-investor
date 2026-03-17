@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slopy — Investor Briefing</title>
+<meta name="theme-color" content="#14141A">
+<meta property="og:title" content="Slopy — The Asset Intelligence OS for Premium Sport Hardware">
+<meta property="og:description" content="Zero Friction. Smart Assets. Perfect Slopes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2D72C8;--blue-mid:#1a5ba8;--blue-tint:#EBF2FB;--blue-deep:#0d2d52;
+  --obsidian:#14141A;--snow:#F7F8FA;--white:#fff;
+  --g100:#F0F2F5;--g200:#E2E6EA;--g400:#9AA3AE;--g600:#5A6472;
+  --green:#16A34A;--amber:#D97706;
+  --line:rgba(255,255,255,0.07);--line2:rgba(255,255,255,0.13);
+  --fd:'Josefin Sans',sans-serif;--fb:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--obsidian);color:var(--snow);font-family:var(--fb);font-size:17px;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ── Progress bar ── */
+#pbar{position:fixed;top:0;left:0;z-index:200;height:2px;background:var(--blue);width:0;transition:width .1s linear}
+
+/* ── Nav ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:rgba(20,20,26,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+.nav-logo{display:flex;align-items:center;gap:12px}
+.nav-logo-svg{width:36px;height:36px}
+.nav-wordmark{font-family:var(--fd);font-weight:200;font-size:1.1rem;letter-spacing:8px;color:var(--blue);text-transform:lowercase}
+.nav-pill{font-family:var(--fd);font-size:11px;font-weight:300;letter-spacing:.15em;text-transform:uppercase;color:var(--g400);border:1px solid var(--line2);border-radius:20px;padding:5px 14px}
+.nav-cta{font-family:var(--fd);font-size:12px;font-weight:400;color:var(--blue);background:rgba(45,114,200,.12);border:1px solid rgba(45,114,200,.25);border-radius:20px;padding:7px 18px;text-decoration:none;transition:all .2s;cursor:pointer}
+.nav-cta:hover{background:rgba(45,114,200,.22)}
+
+/* ── Reveal ── */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+
+/* ── Layout ── */
+.wrap{max-width:960px;margin:0 auto;padding:0 32px}
+section{position:relative}
+.sec-label{font-family:var(--fd);font-size:11px;font-weight:300;letter-spacing:.25em;text-transform:uppercase;color:var(--blue);opacity:.75;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.sec-label::after{content:'';flex:1;max-width:36px;height:1px;background:var(--blue);opacity:.3}
+.sec-h{font-family:var(--fd);font-size:clamp(1.8rem,4vw,3.2rem);font-weight:200;line-height:1.15;letter-spacing:.02em;margin-bottom:18px}
+.sec-h em{font-style:normal;color:var(--blue)}
+.sec-b{font-size:1rem;font-weight:300;color:var(--g400);line-height:1.8;max-width:580px}
+
+/* ── Buttons ── */
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--fd);font-size:.9rem;font-weight:300;letter-spacing:.08em;border-radius:4px;padding:14px 28px;text-decoration:none;cursor:pointer;border:none;transition:all .2s}
+.btn:active{transform:scale(.97)}
+.btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{background:var(--blue-mid)}
+.btn-outline{background:transparent;color:var(--snow);border:1px solid var(--line2)}.btn-outline:hover{border-color:rgba(255,255,255,.25);color:#fff}
+.btn-group{display:flex;gap:12px;flex-wrap:wrap}
+
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:120px 32px 80px;position:relative}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 60% at 50% 50%,black 40%,transparent 100%)}
+.hero-glow{position:absolute;top:30%;left:50%;transform:translateX(-50%);width:700px;height:350px;background:radial-gradient(ellipse,rgba(45,114,200,.07) 0%,transparent 70%);pointer-events:none}
+.hero-logo{width:88px;height:88px;margin:0 auto 28px}
+.hero-eyebrow{font-family:var(--fd);font-size:12px;font-weight:300;letter-spacing:.3em;text-transform:uppercase;color:var(--blue);margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:10px}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:28px;height:1px;background:var(--blue);opacity:.4}
+.hero-hl{font-family:var(--fd);font-size:clamp(2.4rem,6vw,5.2rem);font-weight:200;line-height:1.06;letter-spacing:.04em;margin-bottom:20px}
+.hero-hl em{font-style:normal;color:var(--blue)}
+.hero-sub{font-size:clamp(1rem,2vw,1.15rem);font-weight:300;color:var(--g400);max-width:520px;margin:0 auto 44px;line-height:1.75}
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;font-family:var(--fd);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--g600);animation:sb 2.5s ease-in-out infinite}
+@keyframes sb{0%,100%{transform:translateX(-50%) translateY(0);opacity:.4}50%{transform:translateX(-50%) translateY(6px);opacity:.8}}
+
+/* ── PROBLEM ── */
+#problem{padding:120px 0;border-top:1px solid var(--line)}
+.problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:52px;border-radius:16px;overflow:hidden}
+.prob-card{background:rgba(255,255,255,.03);padding:32px 26px;border:1px solid var(--line);position:relative;overflow:hidden;transition:background .3s}
+.prob-card:hover{background:rgba(255,255,255,.05)}
+.prob-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--pc),transparent);opacity:.5}
+.prob-no{font-family:var(--fd);font-size:10px;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:var(--pc);margin-bottom:14px;opacity:.7}
+.prob-icon{font-size:2rem;margin-bottom:14px;display:block}
+.prob-title{font-family:var(--fd);font-size:1rem;font-weight:300;margin-bottom:10px;line-height:1.3;letter-spacing:.02em}
+.prob-text{font-size:.875rem;color:var(--g400);line-height:1.7}
+
+/* ── SOLUTION ── */
+#solution{padding:120px 0;border-top:1px solid var(--line)}
+.shift{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:52px}
+.shift-side{flex:1;padding:44px 36px}
+.shift-before{background:rgba(255,255,255,.02)}
+.shift-after{background:linear-gradient(135deg,rgba(45,114,200,.08),rgba(45,114,200,.03));border-left:1px solid rgba(45,114,200,.2)}
+.shift-lbl{font-family:var(--fd);font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:300;margin-bottom:18px}
+.shift-word{font-family:var(--fd);font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:200;letter-spacing:.04em;line-height:1.3;margin-bottom:18px}
+.shift-list{list-style:none}
+.shift-list li{display:flex;align-items:baseline;gap:8px;font-size:.9rem;color:var(--g400);margin-bottom:9px;line-height:1.5}
+.shift-list li::before{content:'—';color:var(--g600);flex-shrink:0}
+.shift-list.after li::before{content:'→';color:var(--blue)}
+.shift-arr{width:52px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.03);color:var(--blue);font-size:1.2rem;border-left:1px solid var(--line);border-right:1px solid rgba(45,114,200,.2)}
+
+/* ── EVOLUTION ── */
+#evolution{padding:120px 0;border-top:1px solid var(--line)}
+.evo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:52px}
+.evo-card{padding:36px 28px;background:rgba(255,255,255,.02);border:1px solid var(--line);position:relative;overflow:hidden}
+.evo-card.now{background:linear-gradient(135deg,rgba(45,114,200,.1),rgba(45,114,200,.04));border-color:rgba(45,114,200,.3)}
+.evo-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--ec);opacity:.5}
+.evo-phase{display:inline-block;font-family:var(--fd);font-size:9px;font-weight:300;letter-spacing:.2em;text-transform:uppercase;padding:3px 12px;border-radius:20px;margin-bottom:18px}
+.evo-num{font-family:var(--fd);font-size:2.4rem;font-weight:200;letter-spacing:-.02em;line-height:1;margin-bottom:6px}
+.evo-name{font-family:var(--fd);font-size:1rem;font-weight:300;letter-spacing:.04em;margin-bottom:6px}
+.evo-sub{font-size:.82rem;color:var(--g400);margin-bottom:20px;line-height:1.6}
+.evo-list{list-style:none}
+.evo-list li{font-size:.83rem;color:var(--g400);padding:5px 0;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:7px}
+.evo-list li:last-child{border-bottom:none}
+.evo-list li::before{content:'·';color:var(--ec);font-size:1.1rem;flex-shrink:0;line-height:1}
+.evo-rev{margin-top:18px;font-family:var(--fd);font-size:.78rem;font-weight:300;color:var(--ec);letter-spacing:.04em}
+
+/* ── MARKET ── */
+#market{padding:80px 0;border-top:1px solid var(--line)}
+.market-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:44px;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.mkt-stat{background:rgba(255,255,255,.02);padding:28px 20px;text-align:center;border-right:1px solid var(--line);transition:background .3s}
+.mkt-stat:last-child{border-right:none}
+.mkt-stat:hover{background:rgba(255,255,255,.04)}
+.mkt-n{font-family:var(--fd);font-size:clamp(1.6rem,3vw,2.8rem);font-weight:200;letter-spacing:.02em;color:var(--blue);margin-bottom:5px;line-height:1}
+.mkt-l{font-size:.8rem;color:var(--g400);line-height:1.4}
+.mkt-s{font-family:var(--fd);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--g600);margin-top:4px}
+
+/* ── ESG ── */
+#esg{padding:80px 0;border-top:1px solid var(--line)}
+.esg-card{background:linear-gradient(135deg,rgba(22,163,74,.08),rgba(22,163,74,.03));border:1px solid rgba(22,163,74,.2);border-radius:16px;padding:36px;margin-top:44px;display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.esg-left{}
+.esg-right{display:flex;flex-direction:column;gap:14px}
+.esg-point{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start}
+.esg-ico{font-size:1.2rem;flex-shrink:0;margin-top:2px}
+.esg-pt{font-family:var(--fd);font-size:.85rem;font-weight:300;margin-bottom:3px;letter-spacing:.02em}
+.esg-pd{font-size:.8rem;color:var(--g400);line-height:1.6}
+
+/* ── DEMO ── */
+#demo{padding:120px 0;border-top:1px solid var(--line);background:rgba(255,255,255,.01)}
+.demo-intro{text-align:center;margin-bottom:52px}
+.demo-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:700px;margin:0 auto}
+.demo-card{background:rgba(255,255,255,.03);border:1px solid var(--line2);border-radius:16px;padding:36px 32px;text-align:center;cursor:pointer;transition:all .25s;text-decoration:none;display:block}
+.demo-card:hover{background:rgba(45,114,200,.08);border-color:rgba(45,114,200,.35);transform:translateY(-2px)}
+.demo-card.primary{border-color:rgba(45,114,200,.3);background:rgba(45,114,200,.06)}
+.demo-card:active{transform:scale(.97)}
+.demo-card-icon{font-size:2.8rem;margin-bottom:16px}
+.demo-card-title{font-family:var(--fd);font-size:1.1rem;font-weight:200;letter-spacing:.06em;margin-bottom:8px}
+.demo-card-sub{font-size:.85rem;color:var(--g400);line-height:1.6;margin-bottom:20px}
+.demo-card-creds{background:rgba(255,255,255,.05);border-radius:8px;padding:10px 14px;font-size:.78rem;color:var(--g400);font-family:monospace;line-height:1.8}
+.demo-card-btn{display:inline-flex;align-items:center;gap:6px;font-family:var(--fd);font-size:.82rem;font-weight:300;letter-spacing:.08em;color:var(--blue);margin-top:16px}
+
+/* ── CTA ── */
+#contact{padding:160px 0 120px;text-align:center;position:relative;overflow:hidden}
+.contact-glow{position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(45,114,200,.06) 0%,transparent 65%);pointer-events:none}
+.cta-h{font-family:var(--fd);font-size:clamp(2rem,5vw,4rem);font-weight:200;letter-spacing:.04em;line-height:1.1;margin-bottom:20px}
+.cta-sub{font-size:1.05rem;font-weight:300;color:var(--g400);max-width:460px;margin:0 auto 44px;line-height:1.75}
+
+/* ── Float ── */
+.float-grp{position:fixed;bottom:24px;right:20px;z-index:150;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+#f-demo{display:flex;align-items:center;gap:8px;background:var(--blue);color:#fff;padding:11px 18px;border-radius:4px;font-family:var(--fd);font-size:.82rem;font-weight:300;letter-spacing:.08em;cursor:pointer;border:none;box-shadow:0 4px 20px rgba(45,114,200,.35);opacity:0;transform:translateY(20px);animation:fup .5s 1.5s ease forwards;transition:all .2s}
+#f-demo:hover{background:var(--blue-mid)}
+@keyframes fup{to{opacity:1;transform:none}}
+
+footer{border-top:1px solid var(--line);padding:28px 40px;display:flex;align-items:center;justify-content:space-between}
+.fl{display:flex;align-items:center;gap:10px}
+.fl svg{width:28px;height:28px}
+.fl-w{font-family:var(--fd);font-weight:200;font-size:.88rem;letter-spacing:6px;color:var(--blue);text-transform:lowercase}
+.fc{font-size:12px;color:var(--g600);font-family:var(--fd);font-weight:200;letter-spacing:.06em}
+
+@media(max-width:768px){
+  nav{padding:14px 18px}.nav-pill{display:none}.wrap{padding:0 18px}
+  #hero{padding:90px 18px 60px}
+  .hero-logo{width:64px;height:64px}
+  .problem-grid,.evo-grid,.market-grid{grid-template-columns:1fr}
+  .mkt-stat{border-right:none;border-bottom:1px solid var(--line)}
+  .shift{flex-direction:column}.shift-arr{display:none}
+  .shift-after{border-left:none;border-top:1px solid rgba(45,114,200,.2)}
+  .demo-cards{grid-template-columns:1fr}
+  .esg-card{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:10px;text-align:center;padding:24px 18px}
+  .float-grp{bottom:14px;right:14px}
+}
+</style>
+</head>
+<body>
+<div id="pbar"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg class="nav-logo-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="200" cy="200" r="195" fill="#2D72C8"/>
+      <path d="M 226,80 C 271,67 120,116 124,160 C 128,200 232,191 232,235 C 232,271 125,284 143,290" fill="none" stroke="#fff" stroke-width="11" stroke-linecap="round"/>
+      <path d="M 196,93 C 238,83 147,127 151,169 C 155,207 196,200 196,242 C 196,276 148,284 163,290" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity="0.42"/>
+    </svg>
+    <span class="nav-wordmark">slopy</span>
+  </div>
+  <div class="nav-pill">Investor Briefing 2025</div>
+  <a href="#demo" class="nav-cta">Demo ansehen →</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div style="position:relative;z-index:1;max-width:820px;">
+    <div class="hero-logo rv">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" style="width:88px;height:88px;">
+        <circle cx="200" cy="200" r="195" fill="#2D72C8"/>
+        <path d="M 226,80 C 271,67 120,116 124,160 C 128,200 232,191 232,235 C 232,271 125,284 143,290" fill="none" stroke="#fff" stroke-width="11" stroke-linecap="round"/>
+        <path d="M 196,93 C 238,83 147,127 151,169 C 155,207 196,200 196,242 C 196,276 148,284 163,290" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity="0.42"/>
+      </svg>
+    </div>
+    <div class="hero-eyebrow rv d1">Zero Friction. Smart Assets. Perfect Slopes.</div>
+    <h1 class="hero-hl rv d2">Das Betriebssystem<br>für <em>Premium</em><br>Sport Hardware</h1>
+    <p class="hero-sub rv d3">Slopy verbindet physischen Werkstatt-Service mit digitaler Asset-Intelligenz. Wir beginnen mit Ski — und bauen die Plattform, die jede Premium-Sportart braucht.</p>
+    <div class="btn-group rv d4" style="justify-content:center;">
+      <a href="#problem" class="btn btn-blue">Die Idee verstehen ↓</a>
+      <a href="#demo" class="btn btn-outline">Live Demo ansehen</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="wrap">
+    <div class="sec-label rv">Das Problem</div>
+    <h2 class="sec-h rv d1">Die analoge <em>Blackbox</em></h2>
+    <p class="sec-b rv d2">Sobald Premium-Equipment den Laden verlässt, reißt der Datenstrom ab. Für Besitzer, Werkstätten und Hersteller gleichermaßen.</p>
+    <div class="problem-grid">
+      <div class="prob-card rv d1" style="--pc:#EF4444;">
+        <div class="prob-no">Problem 01</div>
+        <span class="prob-icon">🎿</span>
+        <div class="prob-title">Kein Zustandstracking</div>
+        <p class="prob-text">Der Ski liegt im Keller. Ob Kanten scharf sind, ob der Belag hält — unbekannt. Beim Wiederverkauf: Bauchgefühl statt Beweis. Wertverlust ohne Nachweis.</p>
+      </div>
+      <div class="prob-card rv d2" style="--pc:#F59E0B;">
+        <div class="prob-no">Problem 02</div>
+        <span class="prob-icon">🔧</span>
+        <div class="prob-title">Werkstätten ohne Gedächtnis</div>
+        <p class="prob-text">Jeder Auftrag beginnt bei null. Welcher Belag? Welcher Winkel? Das Expertenwissen der Techniker verschwindet in Papierzetteln — oder nirgendwo.</p>
+      </div>
+      <div class="prob-card rv d3" style="--pc:#2D72C8;">
+        <div class="prob-no">Problem 03</div>
+        <span class="prob-icon">📦</span>
+        <div class="prob-title">Logistik als Showstopper</div>
+        <p class="prob-text">Sperrgut über 120 cm. Kein Standardpaket. Der Transport zur Werkstatt ist der primäre Grund warum Services nicht gebucht werden — nicht Preis oder Interesse.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section id="solution">
+  <div class="wrap">
+    <div class="sec-label rv">Die Lösung</div>
+    <h2 class="sec-h rv d1">Vom Handwerk<br>zur <em>Plattform</em></h2>
+    <p class="sec-b rv d2">Slopy verändert nicht, was in der Werkstatt passiert. Wir digitalisieren alles darum herum — und schaffen dadurch einen datengetriebenen Kreislauf.</p>
+    <div class="shift rv d3">
+      <div class="shift-side shift-before">
+        <div class="shift-lbl" style="color:var(--g600);">Heute — ohne Slopy</div>
+        <div class="shift-word" style="color:var(--g400);">Einmaliges<br>Transaktionsgeschäft</div>
+        <ul class="shift-list">
+          <li>Kein Kundendaten-Trail</li>
+          <li>Manueller Transport-Aufwand</li>
+          <li>Kein Wiederverkaufsnachweis</li>
+          <li>Kein Recurring Revenue</li>
+          <li>Kein B2B-Hebel</li>
+        </ul>
+      </div>
+      <div class="shift-arr">→</div>
+      <div class="shift-side shift-after">
+        <div class="shift-lbl" style="color:var(--blue);">Morgen — mit Slopy</div>
+        <div class="shift-word" style="color:var(--snow);">Asset-OS mit<br>Daten-Layer</div>
+        <ul class="shift-list after">
+          <li>Digitaler Produktpass pro Gerät</li>
+          <li>Automatisierte Logistik-Kette</li>
+          <li>Slopy-Certified Resale-Wert</li>
+          <li>Predictive Maintenance → ARR</li>
+          <li>B2B Multi-Equipment-Management</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVOLUTION -->
+<section id="evolution">
+  <div class="wrap">
+    <div class="sec-label rv">Die Evolution</div>
+    <h2 class="sec-h rv d1">Drei Phasen.<br><em>Eine Logik.</em></h2>
+    <p class="sec-b rv d2">Jede Phase finanziert die nächste. Cashflow-getriebenes Wachstum ohne Abhängigkeit von externem Kapital in der Frühphase.</p>
+    <div class="evo-grid rv d3">
+      <div class="evo-card now" style="--ec:#2D72C8;">
+        <div class="evo-phase" style="background:rgba(45,114,200,.15);color:var(--blue);">Phase 1 · Jetzt</div>
+        <div class="evo-num" style="color:var(--blue);">01</div>
+        <div class="evo-name">Die Befreiung</div>
+        <div class="evo-sub">Pay-per-Service. Logistik lösen. Erste Kunden, erste Daten, erster Cashflow.</div>
+        <ul class="evo-list" style="--ec:#2D72C8;">
+          <li>Consumer App + Buchungsflow</li>
+          <li>Logistische Trinität (@Home, Storebox, B2B)</li>
+          <li>Werkstatt-Dashboard live</li>
+          <li>Digitaler Produktpass</li>
+          <li>Launch-Markt: Wien + Salzburg</li>
+        </ul>
+        <div class="evo-rev">→ Ziel: Break-even Monat 6</div>
+      </div>
+      <div class="evo-card" style="--ec:#16A34A;">
+        <div class="evo-phase" style="background:rgba(22,163,74,.1);color:var(--green);">Phase 2 · Jahr 2</div>
+        <div class="evo-num" style="color:var(--green);">02</div>
+        <div class="evo-name">Die Intelligenz</div>
+        <div class="evo-sub">Abo-Modell, Predictive Maintenance, B2B-Expansion.</div>
+        <ul class="evo-list" style="--ec:#16A34A;">
+          <li>Slopy Health Score Abo</li>
+          <li>Predictive Maintenance Nudges</li>
+          <li>B2B Multi-Equipment-Tracking</li>
+          <li>DACH Rollout + E-Bike Pilot</li>
+          <li>White-Label für Partner</li>
+        </ul>
+        <div class="evo-rev" style="color:var(--green);">→ Recurring Revenue (ARR)</div>
+      </div>
+      <div class="evo-card" style="--ec:#A78BFA;">
+        <div class="evo-phase" style="background:rgba(167,139,250,.1);color:#A78BFA;">Phase 3 · Jahr 3+</div>
+        <div class="evo-num" style="color:#A78BFA;">03</div>
+        <div class="evo-name">Der Marktplatz</div>
+        <div class="evo-sub">Slopy wird das Vertrauenssiegel für zertifizierten Wiederverkauf.</div>
+        <ul class="evo-list" style="--ec:#A78BFA;">
+          <li>Slopy-Certified Marktplatz</li>
+          <li>Transaktionsgebühr 5–8%</li>
+          <li>API-Integration Intersport / willhaben</li>
+          <li>E-Bike Lease-Rücknahme-Welle</li>
+          <li>Pan-EU Premium Sports OS</li>
+        </ul>
+        <div class="evo-rev" style="color:#A78BFA;">→ Platform Economics</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET -->
+<section id="market">
+  <div class="wrap">
+    <div class="sec-label rv">Der Markt</div>
+    <h2 class="sec-h rv d1">Die Opportunity<br><em>in Zahlen</em></h2>
+    <div class="market-grid rv d2">
+      <div class="mkt-stat"><div class="mkt-n">8M</div><div class="mkt-l">Aktive Skifahrer in Österreich</div><div class="mkt-s">Startmarkt</div></div>
+      <div class="mkt-stat"><div class="mkt-n">€2.1B</div><div class="mkt-l">Ski-Servicemarkt EU jährlich</div><div class="mkt-s">TAM Europa</div></div>
+      <div class="mkt-stat"><div class="mkt-n">€680</div><div class="mkt-l">Ø Resale-Wertverlust ohne Nachweis</div><div class="mkt-s">Pro Ski-Paar</div></div>
+      <div class="mkt-stat"><div class="mkt-n">6M+</div><div class="mkt-l">E-Bike Leasingrückgaben bis 2027</div><div class="mkt-s">Next Vertical</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ESG -->
+<section id="esg">
+  <div class="wrap">
+    <div class="sec-label rv">ESG & Regulatorik</div>
+    <h2 class="sec-h rv d1">Slopy ist kein Nice-to-have.<br><em>Es wird Pflicht.</em></h2>
+    <p class="sec-b rv d2">Die EU-Ökodesignverordnung und ESPR (Ecodesign for Sustainable Products Regulation) verpflichten Hersteller ab 2026 zu einem Digitalen Produktpass. Slopy ist die Infrastruktur dafür.</p>
+    <div class="esg-card rv d3">
+      <div class="esg-left">
+        <div style="font-family:var(--fd);font-size:.85rem;font-weight:300;color:var(--green);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">EU Compliance Rückenwind</div>
+        <div style="font-family:var(--fd);font-size:1.5rem;font-weight:200;line-height:1.3;margin-bottom:16px;letter-spacing:.03em;">Wir bauen die Compliance-Infrastruktur, die der Markt nicht vermeiden kann.</div>
+        <p style="font-size:.875rem;color:var(--g400);line-height:1.75;">Die ESPR-Verordnung gilt ab 2026 schrittweise für Sportartikel. Hersteller wie Atomic, Rossignol oder Fischer werden einen zertifizierten Daten-Trail für jedes Produkt brauchen. Slopy ist dieser Trail.</p>
+      </div>
+      <div class="esg-right">
+        <div class="esg-point">
+          <div class="esg-ico">🌱</div>
+          <div><div class="esg-pt">Verlängerte Produktlebensdauer</div><div class="esg-pd">Professionelle Wartung erhöht die Nutzungsdauer von Premium-Equipment um nachweislich 40–60%.</div></div>
+        </div>
+        <div class="esg-point">
+          <div class="esg-ico">📋</div>
+          <div><div class="esg-pt">EU Digital Product Pass (PASSAT)</div><div class="esg-pd">Slopy implementiert den PASSAT-Standard und bereitet Hersteller auf EU-Pflichten vor.</div></div>
+        </div>
+        <div class="esg-point">
+          <div class="esg-ico">🔄</div>
+          <div><div class="esg-pt">Kreislaufwirtschaft</div><div class="esg-pd">Zertifizierter Wiederverkauf reduziert Neuproduktion — messbarer CO₂-Impact pro Transaktion.</div></div>
+        </div>
+        <div class="esg-point">
+          <div class="esg-ico">🏔️</div>
+          <div><div class="esg-pt">OEM-Partnerschaft</div><div class="esg-pd">Wir sind nicht der Feind des Handels. Wir sind der neutrale digitale Layer — für jeden Hersteller offen.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section id="demo">
+  <div class="wrap">
+    <div class="demo-intro">
+      <div class="sec-label rv" style="justify-content:center;">Das Produkt</div>
+      <h2 class="sec-h rv d1" style="text-align:center;">Das haben wir<br><em>bereits gebaut</em></h2>
+      <p style="color:var(--g400);font-size:1rem;font-weight:300;line-height:1.75;max-width:520px;margin:0 auto;" class="rv d2">Kein Mockup. Echte Software, live deployed, mit echter Datenbank. Erleben Sie das Produkt selbst — aus zwei Perspektiven.</p>
+    </div>
+    <div class="demo-cards rv d3">
+      <a class="demo-card primary" href="https://project-26tt1.vercel.app" target="_blank" onclick="loginAs('kunde')">
+        <div class="demo-card-icon">🎿</div>
+        <div class="demo-card-title">Als Kunde testen</div>
+        <div class="demo-card-sub">Ski hinzufügen, Service buchen, Live Tracking verfolgen — die vollständige Consumer Experience.</div>
+        <div class="demo-card-creds">
+          E-Mail: demo-kunde@slopy.at<br>
+          Passwort: SlopDemo2025
+        </div>
+        <div class="demo-card-btn">
+          App öffnen
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </div>
+      </a>
+      <a class="demo-card" href="https://project-26tt1.vercel.app" target="_blank" onclick="loginAs('admin')">
+        <div class="demo-card-icon">🔧</div>
+        <div class="demo-card-title">Admin ansehen</div>
+        <div class="demo-card-sub">Alle Aufträge verwalten, Status aktualisieren, Werkstatt-Dashboard — die operative Steuerung.</div>
+        <div class="demo-card-creds">
+          E-Mail: demo-admin@slopy.at<br>
+          Passwort: SlopDemo2025
+        </div>
+        <div class="demo-card-btn">
+          Dashboard öffnen
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </div>
+      </a>
+    </div>
+    <p style="text-align:center;font-size:.8rem;color:var(--g600);margin-top:20px;font-family:var(--fd);letter-spacing:.06em;" class="rv d4">Einfach auf die Karte klicken — die Zugangsdaten sind bereits eingetragen.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-glow"></div>
+  <div class="wrap" style="position:relative;z-index:1;text-align:center;">
+    <div class="sec-label rv" style="justify-content:center;">Jetzt</div>
+    <h2 class="cta-h rv d1">Lass uns reden.</h2>
+    <p class="cta-sub rv d2">Wir suchen strategische Partner die verstehen, dass die Digitalisierung von Premium-Hardware-Lifecycles ein Milliarden-Markt ist — und dass Slopy der richtige Zeitpunkt ist.</p>
+    <div class="btn-group rv d3" style="justify-content:center;margin-bottom:12px;">
+      <a href="mailto:michael@slopy.at" class="btn btn-blue">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        Gespräch anfragen
+      </a>
+      <a href="#demo" class="btn btn-outline">Demo nochmals ansehen</a>
+    </div>
+    <p style="font-family:var(--fd);font-size:11px;letter-spacing:.1em;color:var(--g600);text-transform:uppercase;" class="rv d4">Kein Deck. Kein Pitch-Theater. Nur das Produkt.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="fl">
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="200" cy="200" r="195" fill="#2D72C8"/>
+      <path d="M 226,80 C 271,67 120,116 124,160 C 128,200 232,191 232,235 C 232,271 125,284 143,290" fill="none" stroke="#fff" stroke-width="11" stroke-linecap="round"/>
+      <path d="M 196,93 C 238,83 147,127 151,169 C 155,207 196,200 196,242 C 196,276 148,284 163,290" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity="0.42"/>
+    </svg>
+    <span class="fl-w">slopy</span>
+  </div>
+  <div class="fc">Zero Friction. Smart Assets. Perfect Slopes. — 2025</div>
+</footer>
+
+<div class="float-grp">
+  <button id="f-demo" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    Demo ansehen
+  </button>
+</div>
+
+<script>
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  document.getElementById('pbar').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+});
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
+function loginAs(role){
+  // Store role hint for the app to pick up
+  sessionStorage.setItem('slopy_demo_role', role);
+}
+</script>
+</body>
+</html>
